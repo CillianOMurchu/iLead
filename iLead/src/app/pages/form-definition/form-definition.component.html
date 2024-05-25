@@ -1,1 +1,10 @@
-<app-create-form-definition></app-create-form-definition>
+<button
+  class="mat-button"
+  mat-raised-button
+  color="primary"
+  (click)="toggleEditing()"
+>
+  Create Form Definition
+</button>
+
+<app-create-form-definition *ngIf="isEditing"></app-create-form-definition>

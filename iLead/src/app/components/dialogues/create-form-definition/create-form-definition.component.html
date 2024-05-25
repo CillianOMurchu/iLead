@@ -1,26 +1,59 @@
+<div class="create-form-definition">
+  <form [formGroup]="formDefinition">
+    <mat-form-field>
+      <mat-label>Form Name</mat-label>
+      <input matInput formControlName="name" />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Context</mat-label>
+      <input matInput formControlName="context" />
+    </mat-form-field>
+  </form>
+  <form [formGroup]="formDefinitionField">
+    <mat-form-field>
+      <mat-label>Label</mat-label>
+      <input matInput formControlName="label" />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Type</mat-label>
+      <input matInput formControlName="type" />
+    </mat-form-field>
+    <button mat-button color="primary" type="button" (click)="addField()">
+      Add Field
+    </button>
+  </form>
+</div>
+
+<div class="current-form-definition">
+  <h1>Current Form Definition</h1>
+
+  <div>{{ formDefinition.value | json }}</div>
+  <div class="fields">
+    Fields
+    <div *ngFor="let field of formFields">
+      {{ field.label }} - {{ field.type }}
+    </div>
+  </div>
+</div>
+
 <button
   class="mat-button"
   mat-raised-button
-  color="primary"
-  (click)="toggleEditing()"
+  color="warn"
+  (click)="saveDefinition()"
 >
-  Create Form Definition
+  Save
 </button>
 
-<div class="inputs" *ngIf="isEditing">
-  <mat-form-field>
-    <mat-label>Input</mat-label>
-    <input matInput />
-  </mat-form-field>
-  <mat-form-field>
-    <mat-label>Select</mat-label>
-    <mat-select>
-      <mat-option value="one">First option</mat-option>
-      <mat-option value="two">Second option</mat-option>
-    </mat-select>
-  </mat-form-field>
-  <mat-form-field>
-    <mat-label>Textarea</mat-label>
-    <textarea matInput></textarea>
-  </mat-form-field>
+<div *ngFor="let definition of savedDefinitions">
+  <h1>Saved Forms</h1>
+
+  <div>Name: {{ definition.name }}</div>
+  <div>Context: {{ definition.context }}</div>
+  <div>
+    Fields
+    <div *ngFor="let field of definition.fields">
+      {{ field.label }} - {{ field.type }}
+    </div>
+  </div>
 </div>

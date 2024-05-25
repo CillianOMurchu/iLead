@@ -1,7 +1,10 @@
+export interface FormDefinitionFieldModel {
+  label: string;
+  type: string;
+}
+
 export interface FormDefinitionModel {
   name: string;
-  field: {
-    label: string;
-    type: string;
-  };
+  fields: [FormDefinitionFieldModel];
+  context: string;
 }
