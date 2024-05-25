@@ -6,9 +6,11 @@ import { AppComponent } from './app.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HomeComponent } from './pages/home/home.component';
-import { FormDefinitionComponent } from './pages/form-definition/form-definition.component';
-import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
+import { HomeComponent } from '@pages/home/home.component';
+import { FormDefinitionComponent } from '@pages/form-definition/form-definition.component';
+import { PageNotFoundComponent } from '@pages/page-not-found/page-not-found.component';
+import { CreateFormDefinitionComponent } from '@components/dialogues/create-form-definition/create-form-definition.component';
+import { MaterialModule } from './material.module';
 
 @NgModule({
   declarations: [
@@ -16,12 +18,13 @@ import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.com
     HomeComponent,
     FormDefinitionComponent,
     PageNotFoundComponent,
+    CreateFormDefinitionComponent,
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
-    MatSlideToggleModule,
+    MaterialModule,
   ],
   providers: [provideAnimationsAsync()],
   bootstrap: [AppComponent],
