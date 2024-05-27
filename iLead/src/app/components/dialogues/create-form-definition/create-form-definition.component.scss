@@ -1,0 +1,21 @@
+.create-form-definition {
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  gap: 20px;
+
+  &__form {
+    &--details,
+    &--fields {
+      display: flex;
+      gap: 5px;
+    }
+    &--fields {
+      display: grid;
+    }
+  }
+}
+
+.form-definition {
+  border: 2px solid red;
+  width: fit-content;
+}

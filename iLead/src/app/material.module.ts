@@ -9,6 +9,10 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatListModule } from '@angular/material/list';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSelectModule } from '@angular/material/select';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatCardModule } from '@angular/material/card';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 @NgModule({
   imports: [
@@ -21,6 +25,10 @@ import { MatSelectModule } from '@angular/material/select';
     ReactiveFormsModule,
     MatSlideToggleModule,
     MatSelectModule,
+    MatSnackBarModule,
+    MatMenuModule,
+    MatCardModule,
+    MatExpansionModule,
   ],
   exports: [
     MatButtonModule,
@@ -32,6 +40,10 @@ import { MatSelectModule } from '@angular/material/select';
     ReactiveFormsModule,
     MatSlideToggleModule,
     MatSelectModule,
+    MatSnackBarModule,
+    MatMenuModule,
+    MatCardModule,
+    MatExpansionModule,
   ],
 })
 export class MaterialModule {}

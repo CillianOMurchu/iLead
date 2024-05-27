@@ -1,59 +1,62 @@
 <div class="create-form-definition">
-  <form [formGroup]="formDefinition">
-    <mat-form-field>
-      <mat-label>Form Name</mat-label>
-      <input matInput formControlName="name" />
-    </mat-form-field>
-    <mat-form-field>
-      <mat-label>Context</mat-label>
-      <input matInput formControlName="context" />
-    </mat-form-field>
-  </form>
-  <form [formGroup]="formDefinitionField">
-    <mat-form-field>
-      <mat-label>Label</mat-label>
-      <input matInput formControlName="label" />
-    </mat-form-field>
-    <mat-form-field>
-      <mat-label>Type</mat-label>
-      <input matInput formControlName="type" />
-    </mat-form-field>
-    <button mat-button color="primary" type="button" (click)="addField()">
-      Add Field
+  <div class="create-form-definition__form">
+    <form
+      [formGroup]="formDefinition"
+      class="create-form-definition__form--details"
+    >
+      <mat-form-field>
+        <mat-label>Form Name</mat-label>
+        <input matInput formControlName="name" />
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Context</mat-label>
+        <input matInput formControlName="context" />
+      </mat-form-field>
+    </form>
+
+    <h2>Fields</h2>
+    <form
+      [formGroup]="formDefinitionField"
+      class="create-form-definition__form--fields"
+    >
+      <mat-form-field>
+        <mat-label>Field Label</mat-label>
+        <input matInput formControlName="label" />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Field Type</mat-label>
+        <input matInput formControlName="type" />
+      </mat-form-field>
+      <button mat-button color="warn" type="button" (click)="addField()">
+        Add Field
+      </button>
+    </form>
+
+    <button
+      class="mat-button"
+      mat-raised-button
+      color="primary"
+      (click)="saveDefinition()"
+    >
+      Save
     </button>
-  </form>
-</div>
-
-<div class="current-form-definition">
-  <h1>Current Form Definition</h1>
-
-  <div>{{ formDefinition.value | json }}</div>
-  <div class="fields">
-    Fields
-    <div *ngFor="let field of formFields">
-      {{ field.label }} - {{ field.type }}
-    </div>
   </div>
-</div>
 
-<button
-  class="mat-button"
-  mat-raised-button
-  color="warn"
-  (click)="saveDefinition()"
->
-  Save
-</button>
-
-<div *ngFor="let definition of savedDefinitions">
-  <h1>Saved Forms</h1>
-
-  <div>Name: {{ definition.name }}</div>
-  <div>Context: {{ definition.context }}</div>
   <div>
-    Fields
-    <div *ngFor="let field of definition.fields">
-      {{ field.label }} - {{ field.type }}
-    </div>
+    <h1>Saved Forms</h1>
+
+    <mat-card
+      class="form-definition"
+      *ngFor="let definition of savedDefinitions"
+    >
+      <mat-card-header>
+        <mat-card-title>{{ definition.name }}</mat-card-title>
+      </mat-card-header>
+      <mat-card-content> Content </mat-card-content>
+      <mat-card-actions>
+        <button color="warn" mat-button>Delete</button>
+      </mat-card-actions>
+    </mat-card>
   </div>
 </div>

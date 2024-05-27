@@ -6,9 +6,5 @@ import { Component } from '@angular/core';
   styleUrl: './form-definition.component.scss',
 })
 export class FormDefinitionComponent {
-  isEditing = false;
-
-  toggleEditing() {
-    this.isEditing = !this.isEditing;
-  }
+  panelOpenState = true;
 }

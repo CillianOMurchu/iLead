@@ -1,10 +1,16 @@
-<button
-  class="mat-button"
-  mat-raised-button
-  color="primary"
-  (click)="toggleEditing()"
->
-  Create Form Definition
-</button>
-
-<app-create-form-definition *ngIf="isEditing"></app-create-form-definition>
+<mat-accordion>
+  <mat-expansion-panel expanded="true" hideToggle (opened)="(panelOpenState)">
+    <mat-expansion-panel-header>
+      <mat-panel-title class="panel-title">
+        <mat-icon
+          aria-hidden="false"
+          aria-label="Example home icon"
+          fontIcon="build"
+          class="icon icon--small"
+        ></mat-icon>
+        <span>Create Form Definition</span>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <app-create-form-definition></app-create-form-definition>
+  </mat-expansion-panel>
+</mat-accordion>
