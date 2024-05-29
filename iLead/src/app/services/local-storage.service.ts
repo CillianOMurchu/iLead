@@ -10,7 +10,11 @@ import {
 export class LocalStorageService {
   constructor() {}
 
-  saveDefinitions(definitions: FormDefinitionModel[]) {
+  saveDefinitions(definitions: FormDefinitionModel[] | null): void {
+    if (!definitions) {
+      return;
+    }
+
     localStorage.setItem('definitions', JSON.stringify(definitions));
   }
 
@@ -20,5 +24,9 @@ export class LocalStorageService {
       return null;
     }
     return JSON.parse(result);
+  }
+
+  deleteDefinitions(): void {
+    localStorage.removeItem('definitions');
   }
 }

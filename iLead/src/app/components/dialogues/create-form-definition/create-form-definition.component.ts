@@ -6,6 +6,7 @@ import {
   FormDefinitionModel,
 } from '@app/models/form-definition.model';
 import { LocalStorageService } from '@app/services/local-storage.service';
+import { filter } from 'rxjs';
 
 @Component({
   selector: 'app-create-form-definition',
@@ -19,7 +20,7 @@ export class CreateFormDefinitionComponent {
 
   formDefinitionField: FormGroup = new FormGroup({});
 
-  savedDefinitions: FormDefinitionModel[] = [];
+  savedDefinitions: FormDefinitionModel[] | null = [];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -51,14 +52,38 @@ export class CreateFormDefinitionComponent {
     }
   }
 
+  deleteDefinition(event: any) {
+    console.log('event is ', event);
+    const currentDefinitions = this.localStorageService.getDefinitions();
+    const filteredDefinitions = currentDefinitions?.filter(
+      (definition) => definition.id !== event.id
+    );
+    console.log('filteredDefinitions are ', filteredDefinitions);
+
+    if (!filteredDefinitions || filteredDefinitions.length === 0) {
+      this.localStorageService.deleteDefinitions();
+      this.savedDefinitions = [];
+    }
+
+    if (filteredDefinitions) {
+      this.localStorageService.saveDefinitions(filteredDefinitions);
+      this.savedDefinitions = this.localStorageService.getDefinitions();
+    }
+    console.log('current definitions are ', currentDefinitions);
+  }
+
   saveDefinition() {
     if (this.formDefinition.valid) {
       let result = this.formDefinition.value;
       result.fields = this.formFields;
-      this.savedDefinitions.push(result);
+      const mathId = Math.random().toString(16).slice(2);
+      result.id = mathId;
+      console.log('result is ', result);
+      this.savedDefinitions?.push(result);
       this.formDefinition.reset();
       this.snackBarService.openSnackBar('Form Definition Saved');
       this.localStorageService.saveDefinitions(this.savedDefinitions);
+      this.buildForm();
     }
   }
 }

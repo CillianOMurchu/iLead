@@ -28,10 +28,12 @@
         <mat-label>Field Type</mat-label>
         <input matInput formControlName="type" />
       </mat-form-field>
-      <button mat-button color="warn" type="button" (click)="addField()">
+      <button mat-raised-button color="warn" type="button" (click)="addField()">
         Add Field
       </button>
     </form>
+
+    <br />
 
     <button
       class="mat-button"
@@ -43,6 +45,18 @@
     </button>
   </div>
 
+  <div class="current-form-being-edited">
+    <h1>Currently Editing</h1>
+    {{ formDefinition.value | json }}
+    <div *ngFor="let field of formFields; let i = index">
+      <div>
+        <span>Field {{ i }}</span>
+        <div>label: {{ field.label }}</div>
+        <div>type: {{ field.type }}</div>
+      </div>
+    </div>
+  </div>
+
   <div>
     <h1>Saved Forms</h1>
 
@@ -51,11 +65,26 @@
       *ngFor="let definition of savedDefinitions"
     >
       <mat-card-header>
-        <mat-card-title>{{ definition.name }}</mat-card-title>
+        <mat-card-title>
+          <div
+            matBadge="{{ definition.fields.length }}"
+            matBadgeOverlap="false"
+            class="demo-section"
+          >
+            {{ definition.name }}
+          </div>
+        </mat-card-title>
       </mat-card-header>
-      <mat-card-content> Content </mat-card-content>
+      <mat-card-content>
+        <div *ngFor="let field of definition.fields">
+          <div>label: {{ field.label }}</div>
+          <div>type: {{ field.type }}</div>
+        </div>
+      </mat-card-content>
       <mat-card-actions>
-        <button color="warn" mat-button>Delete</button>
+        <button (click)="deleteDefinition(definition)" color="warn" mat-button>
+          Delete
+        </button>
       </mat-card-actions>
     </mat-card>
   </div>

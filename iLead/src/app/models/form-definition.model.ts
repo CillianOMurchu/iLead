@@ -7,4 +7,5 @@ export interface FormDefinitionModel {
   name: string;
   fields: [FormDefinitionFieldModel];
   context: string;
+  id: string;
 }
