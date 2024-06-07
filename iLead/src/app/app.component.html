@@ -1,22 +1,48 @@
-<nav>
-  <ul>
-    <li>
-      <a
-        routerLink="/home"
-        routerLinkActive="active"
-        ariaCurrentWhenActive="page"
-        >Home</a
+<mat-toolbar>
+  <button
+    mat-icon-button
+    [matMenuTriggerFor]="menu"
+    aria-label="Example icon-button with a menu"
+  >
+    <mat-icon>more_vert</mat-icon>
+  </button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item>
+      <mat-icon>home</mat-icon>
+      <span
+        ><a
+          routerLink="/home"
+          routerLinkActive="active"
+          ariaCurrentWhenActive="page"
+          >Home</a
+        ></span
       >
-    </li>
-    <li>
-      <a
-        routerLink="/form-definition"
-        routerLinkActive="active"
-        ariaCurrentWhenActive="page"
-        >Form Definition</a
+    </button>
+    <button mat-menu-item>
+      <mat-icon>create</mat-icon>
+      <span
+        ><a
+          routerLink="/form-definition"
+          routerLinkActive="active"
+          ariaCurrentWhenActive="page"
+          >Form Definition</a
+        ></span
       >
-    </li>
-  </ul>
-</nav>
+    </button>
+    <button mat-menu-item>
+      <mat-icon>smart_toy</mat-icon>
+      <span
+        ><a
+          routerLink="/chatbot"
+          routerLinkActive="active"
+          ariaCurrentWhenActive="page"
+          >Chatbot</a
+        ></span
+      >
+    </button>
+  </mat-menu>
+
+  <span>iLead</span>
+</mat-toolbar>
 
 <router-outlet></router-outlet>
