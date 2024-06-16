@@ -13,6 +13,7 @@ import { CreateFormDefinitionComponent } from '@components/dialogues/create-form
 import { MaterialModule } from '@material';
 import { KanbanComponent } from '@pages/kanban/kanban.component';
 import { TaskComponent } from '@app/components/kanban/task/task.component';
+import { TaskDialogComponent } from './components/dialogues/task-dialog/task-dialog.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { TaskComponent } from '@app/components/kanban/task/task.component';
     CreateFormDefinitionComponent,
     KanbanComponent,
     TaskComponent,
+    TaskDialogComponent,
   ],
   imports: [
     BrowserModule,

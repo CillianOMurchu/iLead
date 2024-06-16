@@ -1,6 +1,8 @@
 import { CdkDragDrop, transferArrayItem } from '@angular/cdk/drag-drop';
 import { Component } from '@angular/core';
-import type { Task } from '@app/models/kanban/task.model';
+import { MatDialog } from '@angular/material/dialog';
+import { TaskDialogComponent } from '@app/components/dialogues/task-dialog/task-dialog.component';
+import type { Task, TaskDialogResult } from '@app/models/kanban/task.model';
 
 @Component({
   selector: 'app-kanban',
@@ -8,6 +10,25 @@ import type { Task } from '@app/models/kanban/task.model';
   styleUrl: './kanban.component.scss',
 })
 export class KanbanComponent {
+  constructor(private dialog: MatDialog) {}
+
+  newTask(): void {
+    const dialogRef = this.dialog.open(TaskDialogComponent, {
+      width: '270px',
+      data: {
+        task: {},
+      },
+    });
+    dialogRef
+      .afterClosed()
+      .subscribe((result: TaskDialogResult | undefined) => {
+        if (!result) {
+          return;
+        }
+        this.todo.push(result.task);
+      });
+  }
+
   todo: Task[] = [
     {
       title: 'Buy milk',
