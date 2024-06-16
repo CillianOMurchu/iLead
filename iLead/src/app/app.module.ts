@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 import { HomeComponent } from '@pages/home/home.component';
 import { FormDefinitionComponent } from '@pages/form-definition/form-definition.component';
 import { PageNotFoundComponent } from '@pages/page-not-found/page-not-found.component';
@@ -28,6 +29,7 @@ import { TaskComponent } from '@app/components/kanban/task/task.component';
     BrowserAnimationsModule,
     AppRoutingModule,
     MaterialModule,
+    DragDropModule
   ],
   providers: [provideAnimationsAsync()],
   bootstrap: [AppComponent],
