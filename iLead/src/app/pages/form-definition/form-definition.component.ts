@@ -5,11 +5,10 @@ import type { FormDefinitionDialogResult } from '@app/models/form-definition.mod
 import {
   Firestore,
   setDoc,
-  addDoc,
-  collection,
-  collectionData,
   doc,
 } from '@angular/fire/firestore';
+import { SnackBarService } from '@services/snack-bar.service';
+
 
 @Component({
   selector: 'app-form-definition',
@@ -19,7 +18,10 @@ import {
 export class FormDefinitionComponent {
   firestore: Firestore = inject(Firestore);
 
-  constructor(private dialog: MatDialog) {}
+  constructor(
+    private dialog: MatDialog,
+    private snackBarService: SnackBarService
+  ) {}
 
   newTask(): void {
     const dialogRef = this.dialog.open(CreateFormDefinitionComponent, {
@@ -40,7 +42,7 @@ export class FormDefinitionComponent {
             ...result.definition,
             id: refId,
           });
-          console.log('Definition added successfully.');
+          this.snackBarService.openSnackBar('Form Definition Saved');
         } catch (error) {
           console.error('Error adding task:', error);
           throw error; // Propagate error to handle in component
