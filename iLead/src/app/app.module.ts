@@ -9,8 +9,9 @@ import { HomeComponent } from '@pages/home/home.component';
 import { FormDefinitionComponent } from '@pages/form-definition/form-definition.component';
 import { PageNotFoundComponent } from '@pages/page-not-found/page-not-found.component';
 import { CreateFormDefinitionComponent } from '@components/dialogues/create-form-definition/create-form-definition.component';
-import { MaterialModule } from './material.module';
+import { MaterialModule } from '@material';
 import { KanbanComponent } from '@pages/kanban/kanban.component';
+import { TaskComponent } from '@app/components/kanban/task/task.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { KanbanComponent } from '@pages/kanban/kanban.component';
     PageNotFoundComponent,
     CreateFormDefinitionComponent,
     KanbanComponent,
+    TaskComponent,
   ],
   imports: [
     BrowserModule,
