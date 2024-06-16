@@ -2,7 +2,7 @@ import { CdkDragDrop, transferArrayItem } from '@angular/cdk/drag-drop';
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { TaskDialogComponent } from '@app/components/dialogues/task-dialog/task-dialog.component';
-import type { Task, TaskDialogResult } from '@app/models/kanban/task.model';
+import type { Task, TaskDialogResult, TaskList } from '@app/models/kanban/task.model';
 
 @Component({
   selector: 'app-kanban',
@@ -42,7 +42,7 @@ export class KanbanComponent {
   inProgress: Task[] = [];
   done: Task[] = [];
 
-  editTask(list: 'done' | 'todo' | 'inProgress', task: Task): void {
+  editTask(list: TaskList, task: Task): void {
     const dialogRef = this.dialog.open(TaskDialogComponent, {
       width: '270px',
       data: {

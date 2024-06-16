@@ -13,3 +13,5 @@ export interface TaskDialogResult {
   task: Task;
   delete?: boolean;
 }
+
+export type TaskList = 'done' | 'todo' | 'inProgress';
