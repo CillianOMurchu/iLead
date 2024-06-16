@@ -6,6 +6,7 @@ import { FormDefinitionComponent } from './pages/form-definition/form-definition
 import { ChatbotComponent } from './components/pages/chatbot/chatbot.component';
 
 const routes: Routes = [
+  { path: '', redirectTo: '/home', pathMatch: 'full'},
   { path: 'home', component: HomeComponent },
   { path: 'form-definition', component: FormDefinitionComponent },
   { path: 'chatbot', component: ChatbotComponent },

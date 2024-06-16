@@ -1,6 +1,6 @@
 export interface FormDefinitionFieldModel {
   label: string;
-  type: string;
+  type: {};
 }
 
 export interface FormDefinitionModel {
