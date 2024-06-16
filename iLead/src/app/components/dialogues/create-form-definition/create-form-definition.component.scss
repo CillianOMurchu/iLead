@@ -1,9 +1,15 @@
 .create-form-definition {
-  display: grid;
-  grid-template-columns: 3fr 1fr;
-  gap: 20px;
+  padding: 50px;
+  text-align: center;
 
   &__form {
+    &__current{
+     &__field{
+      display: flex;
+    align-items: center;
+    gap: 12px;
+     }
+    }
     &--details,
     &--fields {
       display: flex;

@@ -1,4 +1,4 @@
-<mat-accordion>
+<!-- <mat-accordion>
   <mat-expansion-panel expanded="true" hideToggle (opened)="(panelOpenState)">
     <mat-expansion-panel-header>
       <mat-panel-title class="panel-title">
@@ -13,4 +13,16 @@
     </mat-expansion-panel-header>
     <app-create-form-definition></app-create-form-definition>
   </mat-expansion-panel>
-</mat-accordion>
+</mat-accordion> -->
+
+<p>
+
+<mat-toolbar color="primary">
+  <mat-icon>create</mat-icon>
+  <span>Definitions</span>
+</mat-toolbar>
+</p>
+
+<button (click)="newTask()" mat-button>
+  <mat-icon>add</mat-icon> Add Task
+</button>

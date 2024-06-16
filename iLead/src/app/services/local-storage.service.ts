@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import {
-  FormDefinitionFieldModel,
-  FormDefinitionModel,
+  FormDefinition,
 } from '@app/models/form-definition.model';
 
 @Injectable({
@@ -10,7 +9,7 @@ import {
 export class LocalStorageService {
   constructor() {}
 
-  saveDefinitions(definitions: FormDefinitionModel[] | null): void {
+  saveDefinitions(definitions: FormDefinition[] | null): void {
     if (!definitions) {
       return;
     }
@@ -18,7 +17,7 @@ export class LocalStorageService {
     localStorage.setItem('definitions', JSON.stringify(definitions));
   }
 
-  getDefinitions(): FormDefinitionModel[] | null {
+  getDefinitions(): FormDefinition[] | null {
     const result = localStorage.getItem('definitions');
     if (!result) {
       return null;
