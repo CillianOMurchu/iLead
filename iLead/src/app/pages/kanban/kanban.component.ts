@@ -1,8 +1,15 @@
 import { CdkDragDrop, transferArrayItem } from '@angular/cdk/drag-drop';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { TaskDialogComponent } from '@app/components/dialogues/task-dialog/task-dialog.component';
-import type { Task, TaskDialogResult, TaskList } from '@app/models/kanban/task.model';
+import type {
+  Task,
+  TaskDialogResult,
+  TaskList,
+} from '@app/models/kanban/task.model';
+import { Firestore, collection, collectionData } from '@angular/fire/firestore';
+import { Observable } from 'rxjs';
+import { doc, setDoc } from 'firebase/firestore';
 
 @Component({
   selector: 'app-kanban',
@@ -10,7 +17,20 @@ import type { Task, TaskDialogResult, TaskList } from '@app/models/kanban/task.m
   styleUrl: './kanban.component.scss',
 })
 export class KanbanComponent {
-  constructor(private dialog: MatDialog) {}
+  firestore: Firestore = inject(Firestore);
+  todo$: Observable<any[]>;
+  inProgress$: Observable<any[]>;
+  done$: Observable<any[]>;
+
+  constructor(private dialog: MatDialog) {
+    const todoCollection = collection(this.firestore, 'tasks');
+    this.todo$ = collectionData(todoCollection);
+
+    const inProgressCollection = collection(this.firestore, 'tasks');
+    this.inProgress$ = collectionData(inProgressCollection);
+    const doneCollection = collection(this.firestore, 'tasks');
+    this.done$ = collectionData(doneCollection);
+  }
 
   newTask(): void {
     const dialogRef = this.dialog.open(TaskDialogComponent, {
@@ -21,93 +41,59 @@ export class KanbanComponent {
     });
     dialogRef
       .afterClosed()
-      .subscribe((result: TaskDialogResult | undefined) => {
+      .subscribe(async (result: TaskDialogResult | undefined) => {
         if (!result) {
           return;
         }
-        this.todo.push(result.task);
+        // this.todo$.push(result.task);
+        await setDoc(doc(this.firestore, 'tasks', 'To Do'), result.task);
       });
   }
-
-  todo: Task[] = [
-    {
-      title: 'Buy milk',
-      description: 'Go to the store and buy milk',
-    },
-    {
-      title: 'Create a Kanban app',
-      description: 'Using Firebase and Angular create a Kanban app!',
-    },
-  ];
-  inProgress: Task[] = [];
-  done: Task[] = [];
-
   editTask(list: TaskList, task: Task): void {
-    const dialogRef = this.dialog.open(TaskDialogComponent, {
-      width: '270px',
-      data: {
-        task,
-        enableDelete: true,
-      },
-    });
-    dialogRef.afterClosed().subscribe((result: TaskDialogResult|undefined) => {
-      if (!result) {
-        return;
-      }
-      const dataList = this[list];
-      const taskIndex = dataList.indexOf(task);
-      if (result.delete) {
-        dataList.splice(taskIndex, 1);
-      } else {
-        dataList[taskIndex] = task;
-      }
-    });
+
   }
+
+  // editTask(list: TaskList, task: Task): void {
+  //   const dialogRef = this.dialog.open(TaskDialogComponent, {
+  //     width: '270px',
+  //     data: {
+  //       task,
+  //       enableDelete: true,
+  //     },
+  //   });
+  //   dialogRef
+  //     .afterClosed()
+  //     .subscribe((result: TaskDialogResult | undefined) => {
+  //       if (!result) {
+  //         return;
+  //       }
+  //       const dataList = this[list];
+  //       const taskIndex = dataList.indexOf(task);
+  //       if (result.delete) {
+  //         dataList.splice(taskIndex, 1);
+  //       } else {
+  //         dataList[taskIndex] = task;
+  //       }
+  //     });
+  // }
 
   drop(event: CdkDragDrop<Task[]>): void {
-    if (event.previousContainer === event.container) {
-      return;
-    }
-    if (!event.container.data || !event.previousContainer.data) {
-      return;
-    }
-    transferArrayItem(
-      event.previousContainer.data,
-      event.container.data,
-      event.previousIndex,
-      event.currentIndex
-    );
+  //   if (event.previousContainer === event.container) {
+  //     return;
+  //   }
+  //   const item = event.previousContainer.data[event.previousIndex];
+  //   this.store.firestore.runTransaction(() => {
+  //     const promise = Promise.all([
+  //       this.store.collection(event.previousContainer.id).doc(item.id).delete(),
+  //       this.store.collection(event.container.id).add(item),
+  //     ]);
+  //     return promise;
+  //   });
+  //   transferArrayItem(
+  //     event.previousContainer.data,
+  //     event.container.data,
+  //     event.previousIndex,
+  //     event.currentIndex
+  //   );
   }
 }
-// export class KanbanComponent {
-//  // to be fetched from firebase eventually
-//  todo: Task[] = [
-//   {
-//     title: 'Buy milk',
-//     description: 'Go to the store and buy milk'
-//   },
-//   {
-//     title: 'Create a Kanban app',
-//     description: 'Using Firebase and Angular create a Kanban app!'
-//   }
-// ];
-// inProgress: Task[] = [];
-// done: Task[] = [];
-
-// editTask(list: string, task: Task): void {}
-
-// drop(event: CdkDragDrop<Task[]>): void {
-//   if (event.previousContainer === event.container) {
-//     return;
-//   }
-//   if (!event.container.data || !event.previousContainer.data) {
-//     return;
-//   }
-//   transferArrayItem(
-//     event.previousContainer.data,
-//     event.container.data,
-//     event.previousIndex,
-//     event.currentIndex
-//   );
-// }
-// }

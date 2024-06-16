@@ -14,6 +14,9 @@ import { MaterialModule } from '@material';
 import { KanbanComponent } from '@pages/kanban/kanban.component';
 import { TaskComponent } from '@app/components/kanban/task/task.component';
 import { TaskDialogComponent } from './components/dialogues/task-dialog/task-dialog.component';
+import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
+import { getFirestore, provideFirestore } from '@angular/fire/firestore';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -31,9 +34,13 @@ import { TaskDialogComponent } from './components/dialogues/task-dialog/task-dia
     BrowserAnimationsModule,
     AppRoutingModule,
     MaterialModule,
-    DragDropModule
+    DragDropModule,
   ],
-  providers: [provideAnimationsAsync()],
+  providers: [
+    provideAnimationsAsync(),
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideFirestore(() => getFirestore()),
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

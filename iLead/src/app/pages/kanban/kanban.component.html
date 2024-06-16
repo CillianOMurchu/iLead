@@ -11,21 +11,21 @@
   <div class="container-wrapper">
     <div class="container">
       <h2>Backlog</h2>
+      <!-- [cdkDropListConnectedTo]="[doneList, ininProgressList]" -->
+      <!-- (cdkDropListDropped)="drop($event)" -->
 
       <mat-card
         cdkDropList
         id="todo"
         #todoList="cdkDropList"
-        [cdkDropListData]="todo"
-        [cdkDropListConnectedTo]="[doneList, inProgressList]"
-        (cdkDropListDropped)="drop($event)"
+        [cdkDropListData]="todo$ | async"
         class="list">
-        <p class="empty-label" *ngIf="todo.length === 0">Empty list</p>
-        <app-task (edit)="editTask('todo', $event)" *ngFor="let task of todo" cdkDrag [task]="task"></app-task>
+        <!-- <p class="empty-label" *ngIf="todo$.length === 0">Empty list</p> -->
+        <app-task (edit)="editTask('todo', $event)" *ngFor="let task of todo$ | async" cdkDrag [task]="task"></app-task>
       </mat-card>
     </div>
 
-    <div class="container">
+    <!-- <div class="container">
       <h2>In progress</h2>
 
       <mat-card
@@ -55,6 +55,16 @@
         <p class="empty-label" *ngIf="done.length === 0">Empty list</p>
         <app-task (edit)="editTask('done', $event)" *ngFor="let task of done" cdkDrag [task]="task"></app-task>
       </mat-card>
-    </div>
+    </div> -->
   </div>
 </div>
+
+
+
+// other stuff
+
+<ul>
+  <li class="text" *ngFor="let item of todo$ | async">
+    {{item.name}}
+  </li>
+</ul>
