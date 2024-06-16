@@ -81,6 +81,7 @@ export class CreateFormDefinitionComponent {
       const result = this.formDefinition.value;
       result.fields = this.formFields;
       console.log('wanna save ', result);
+      this.dialogRef.close({ definition: result });
       //   const mathId = Math.random().toString(16).slice(2);
       //   result.id = mathId;
       //   console.log('result is ', result);
