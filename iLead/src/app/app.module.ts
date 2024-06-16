@@ -19,7 +19,7 @@ import { KanbanComponent } from '@pages/kanban/kanban.component';
     FormDefinitionComponent,
     PageNotFoundComponent,
     CreateFormDefinitionComponent,
-    KanbanComponent
+    KanbanComponent,
   ],
   imports: [
     BrowserModule,
