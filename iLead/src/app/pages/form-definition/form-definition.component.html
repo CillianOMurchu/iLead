@@ -1,28 +1,28 @@
-<!-- <mat-accordion>
-  <mat-expansion-panel expanded="true" hideToggle (opened)="(panelOpenState)">
-    <mat-expansion-panel-header>
-      <mat-panel-title class="panel-title">
-        <mat-icon
-          aria-hidden="false"
-          aria-label="Example home icon"
-          fontIcon="build"
-          class="icon icon--small"
-        ></mat-icon>
-        <span>Create Form Definition</span>
-      </mat-panel-title>
-    </mat-expansion-panel-header>
-    <app-create-form-definition></app-create-form-definition>
-  </mat-expansion-panel>
-</mat-accordion> -->
-
 <p>
-
-<mat-toolbar color="primary">
-  <mat-icon>create</mat-icon>
-  <span>Definitions</span>
-</mat-toolbar>
+  <mat-toolbar color="primary">
+    <mat-icon>create</mat-icon>
+    <span>Definitions</span>
+  </mat-toolbar>
 </p>
 
-<button (click)="newTask()" mat-button>
-  <mat-icon>add</mat-icon> Add Task
+<button (click)="newDefinition()" mat-button>
+  <mat-icon>add</mat-icon> Add Definition
 </button>
+
+<!-- // display list of saved definitions from firestore -->
+
+<div class="content-wrapper">
+  <div class="container-wrapper">
+    <div class="container">
+      <h2>Definitions</h2>
+
+      <mat-card id="definitions" class="list">
+          <app-definition
+          *ngFor="let definition of definitions$ | async"
+            [formDefinition]="definition"
+            (edit)="editDefinition($event)"
+          />
+      </mat-card>
+    </div>
+  </div>
+</div>

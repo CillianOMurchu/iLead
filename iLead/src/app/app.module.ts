@@ -17,6 +17,8 @@ import { TaskDialogComponent } from './components/dialogues/task-dialog/task-dia
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { environment } from '../environments/environment';
+import { DefinitionComponent } from './components/definition/definition.component';
+import { EditFormDefinitionComponent } from './components/dialogues/edit-form-definition/edit-form-definition.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +30,8 @@ import { environment } from '../environments/environment';
     KanbanComponent,
     TaskComponent,
     TaskDialogComponent,
+    DefinitionComponent,
+    EditFormDefinitionComponent,
   ],
   imports: [
     BrowserModule,
