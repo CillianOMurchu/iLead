@@ -10,6 +10,6 @@ export class DefinitionComponent {
   @Input() formDefinition: any;
   @Output() edit = new EventEmitter<FormDefinition>();
 
-  constructor() {
-  }
+  constructor() {}
+
 }

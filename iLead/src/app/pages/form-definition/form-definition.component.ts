@@ -8,9 +8,9 @@ import {
 } from '@app/models/form-definition.model';
 import { SnackBarService } from '@services/snack-bar.service';
 import type { Observable } from 'rxjs/internal/Observable';
-import { EditFormDefinitionComponent } from '@components/dialogues/edit-form-definition/edit-form-definition.component';
 import { type DocumentData } from 'firebase/firestore';
 import { FirestoreService } from '@app/services/firestore.service';
+import { FormDefinitionService } from '@app/services/form-definition.service';
 
 @Component({
   selector: 'app-form-definition',
@@ -23,7 +23,8 @@ export class FormDefinitionComponent {
   constructor(
     private dialog: MatDialog,
     private snackBarService: SnackBarService,
-    private firestoreService: FirestoreService
+    private firestoreService: FirestoreService,
+    private formDefinitionService: FormDefinitionService
   ) {
     this.definitions$ = this.firestoreService.getCollection(
       FIRESTORE_COLLECTIONS.DEFINITIONS
@@ -58,40 +59,6 @@ export class FormDefinitionComponent {
   }
 
   editDefinition(definition: FormDefinition): void {
-    const dialogRef = this.dialog.open(EditFormDefinitionComponent, {
-      data: {
-        definition,
-        enableDelete: true,
-      },
-    });
-    dialogRef
-      .afterClosed()
-      .subscribe(async (result: FormDefinitionDialogResult | undefined) => {
-        if (!result || !result.definition) {
-          return;
-        }
-        console.log('result is ', result);
-        const { definition } = result;
-        const { id } = definition;
-
-        if (result.delete) {
-          this.firestoreService.deleteDoc(
-            FIRESTORE_COLLECTIONS.DEFINITIONS,
-            id
-          );
-        } else {
-          try {
-            this.firestoreService.save(
-              FIRESTORE_COLLECTIONS.DEFINITIONS,
-              definition,
-              id
-            );
-            this.snackBarService.openSnackBar('Form Definition Updated');
-          } catch (error) {
-            console.error('Error updating definition:', error);
-            throw error;
-          }
-        }
-      });
+    this.formDefinitionService.editDefinition(definition);
   }
 }

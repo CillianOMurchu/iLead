@@ -1,9 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import {
-  FormDefinition,
-  type FormDefinitionDialogData,
-} from '@app/models/form-definition.model';
+import { FormDefinition } from '@app/models/form-definition.model';
 
 @Component({
   selector: 'app-edit-form-definition',
@@ -16,8 +13,8 @@ export class EditFormDefinitionComponent {
   };
 
   constructor(
-    public dialogRef: MatDialogRef<FormDefinitionDialogData>,
-    @Inject(MAT_DIALOG_DATA) public data: FormDefinitionDialogData
+    public dialogRef: MatDialogRef<any>,
+    @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
 
   cancel(): void {

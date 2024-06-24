@@ -1,1 +1,20 @@
-<p>chatbot works!</p>
+<!-- // display a list of available forms and their details from the definitions$ Observable-->
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <h1>Chatbot</h1>
+      <hr>
+      <hr>
+      <hr>
+
+      <h1>Chatbot Types</h1>
+      <hr>
+      <app-definition
+        *ngFor="let definition of definitions$ | async"
+        (edit)="editDefinition($event)"
+        [formDefinition]="definition"
+      />
+    </div>
+  </div>
+</div>
