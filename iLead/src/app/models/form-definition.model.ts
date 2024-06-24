@@ -3,11 +3,17 @@ export interface FormDefinitionField {
   type: {};
 }
 
+export interface ContextModel {
+  company: string;
+  objective: string;
+}
+
 export interface FormDefinition {
   name: string;
   fields: [FormDefinitionField];
-  context: string;
+  context: ContextModel;
   id: string;
+  prompt: string;
 }
 
 export interface FormDefinitionDialogResult {

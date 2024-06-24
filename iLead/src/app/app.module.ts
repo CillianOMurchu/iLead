@@ -18,6 +18,7 @@ import { environment } from '../environments/environment';
 import { DefinitionComponent } from './components/definition/definition.component';
 import { EditFormDefinitionComponent } from './components/dialogues/edit-form-definition/edit-form-definition.component';
 import { ChatbotComponent } from './pages/chatbot/chatbot.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { ChatbotComponent } from './pages/chatbot/chatbot.component';
     AppRoutingModule,
     MaterialModule,
     DragDropModule,
+    HttpClientModule,
   ],
   providers: [
     provideAnimationsAsync(),
