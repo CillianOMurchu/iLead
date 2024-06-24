@@ -32,6 +32,7 @@ export class CreateFormDefinitionComponent {
     this.formDefinition = this.formBuilder.group({
       name: [''],
       context: [''],
+      id: [''],
     });
     this.formDefinitionField = this.formBuilder.group({
       label: [''],

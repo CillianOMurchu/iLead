@@ -11,14 +11,13 @@ import { FormDefinitionComponent } from '@pages/form-definition/form-definition.
 import { PageNotFoundComponent } from '@pages/page-not-found/page-not-found.component';
 import { CreateFormDefinitionComponent } from '@components/dialogues/create-form-definition/create-form-definition.component';
 import { MaterialModule } from '@material';
-import { KanbanComponent } from '@pages/kanban/kanban.component';
-import { TaskComponent } from '@app/components/kanban/task/task.component';
 import { TaskDialogComponent } from './components/dialogues/task-dialog/task-dialog.component';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { environment } from '../environments/environment';
 import { DefinitionComponent } from './components/definition/definition.component';
 import { EditFormDefinitionComponent } from './components/dialogues/edit-form-definition/edit-form-definition.component';
+import { ChatbotComponent } from './pages/chatbot/chatbot.component';
 
 @NgModule({
   declarations: [
@@ -27,11 +26,10 @@ import { EditFormDefinitionComponent } from './components/dialogues/edit-form-de
     FormDefinitionComponent,
     PageNotFoundComponent,
     CreateFormDefinitionComponent,
-    KanbanComponent,
-    TaskComponent,
     TaskDialogComponent,
     DefinitionComponent,
     EditFormDefinitionComponent,
+    ChatbotComponent,
   ],
   imports: [
     BrowserModule,

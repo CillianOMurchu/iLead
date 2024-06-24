@@ -1,21 +1,16 @@
 import { Component, inject } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { CreateFormDefinitionComponent } from '@app/components/dialogues/create-form-definition/create-form-definition.component';
-import type {
-  FormDefinition,
-  FormDefinitionDialogResult,
-} from '@app/models/form-definition.model';
 import {
-  Firestore,
-  setDoc,
-  doc,
-  collection,
-  collectionData,
-} from '@angular/fire/firestore';
+  FIRESTORE_COLLECTIONS,
+  type FormDefinition,
+  type FormDefinitionDialogResult,
+} from '@app/models/form-definition.model';
 import { SnackBarService } from '@services/snack-bar.service';
 import type { Observable } from 'rxjs/internal/Observable';
 import { EditFormDefinitionComponent } from '@components/dialogues/edit-form-definition/edit-form-definition.component';
-import { deleteDoc } from 'firebase/firestore';
+import { type DocumentData } from 'firebase/firestore';
+import { FirestoreService } from '@app/services/firestore.service';
 
 @Component({
   selector: 'app-form-definition',
@@ -23,18 +18,19 @@ import { deleteDoc } from 'firebase/firestore';
   styleUrl: './form-definition.component.scss',
 })
 export class FormDefinitionComponent {
-  firestore: Firestore = inject(Firestore);
-  definitions$: Observable<any[]>;
+  definitions$: Observable<DocumentData[]>;
 
   constructor(
     private dialog: MatDialog,
-    private snackBarService: SnackBarService
+    private snackBarService: SnackBarService,
+    private firestoreService: FirestoreService
   ) {
-    const definitionCollection = collection(this.firestore, 'definitions');
-    this.definitions$ = collectionData(definitionCollection);
+    this.definitions$ = this.firestoreService.getCollection(
+      FIRESTORE_COLLECTIONS.DEFINITIONS
+    );
   }
 
-  newDefinition(): void {
+  createDefinition(): void {
     const dialogRef = this.dialog.open(CreateFormDefinitionComponent, {
       data: {
         definition: {},
@@ -48,12 +44,11 @@ export class FormDefinitionComponent {
           return;
         }
         try {
-          console.log('result is ', result);
-          const refId = 'id' + Math.random().toString(16).slice(2);
-          await setDoc(doc(this.firestore, 'definitions', refId), {
-            ...result.definition,
-            id: refId,
-          });
+          this.firestoreService.save(
+            FIRESTORE_COLLECTIONS.DEFINITIONS,
+            result.definition,
+            result.definition.id
+          );
           this.snackBarService.openSnackBar('Form Definition Saved');
         } catch (error) {
           console.error('Error adding task:', error);
@@ -63,7 +58,6 @@ export class FormDefinitionComponent {
   }
 
   editDefinition(definition: FormDefinition): void {
-    console.log('definition is ', definition);
     const dialogRef = this.dialog.open(EditFormDefinitionComponent, {
       data: {
         definition,
@@ -76,20 +70,27 @@ export class FormDefinitionComponent {
         if (!result || !result.definition) {
           return;
         }
+        console.log('result is ', result);
+        const { definition } = result;
+        const { id } = definition;
+
         if (result.delete) {
-          await deleteDoc(
-            doc(this.firestore, 'definitions', result.definition.id)
+          this.firestoreService.deleteDoc(
+            FIRESTORE_COLLECTIONS.DEFINITIONS,
+            id
           );
-        }
-        try {
-          await setDoc(
-            doc(this.firestore, 'definitions', result.definition.id),
-            result.definition
-          );
-          this.snackBarService.openSnackBar('Form Definition Updated');
-        } catch (error) {
-          console.error('Error updating definition:', error);
-          throw error; // Propagate error to handle in component
+        } else {
+          try {
+            this.firestoreService.save(
+              FIRESTORE_COLLECTIONS.DEFINITIONS,
+              definition,
+              id
+            );
+            this.snackBarService.openSnackBar('Form Definition Updated');
+          } catch (error) {
+            console.error('Error updating definition:', error);
+            throw error;
+          }
         }
       });
   }

@@ -20,3 +20,6 @@ export interface FormDefinitionDialogData {
   enableDelete: boolean;
 }
 
+export const FIRESTORE_COLLECTIONS = {
+  DEFINITIONS: 'definitions',
+};

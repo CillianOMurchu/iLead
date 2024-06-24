@@ -3,13 +3,13 @@ import { RouterModule, Routes } from '@angular/router';
 import { PageNotFoundComponent } from '@pages/page-not-found/page-not-found.component';
 import { HomeComponent } from '@pages/home/home.component';
 import { FormDefinitionComponent } from '@pages/form-definition/form-definition.component';
-import { KanbanComponent } from '@pages/kanban/kanban.component';
+import { ChatbotComponent } from '@app/pages/chatbot/chatbot.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full'},
   { path: 'home', component: HomeComponent },
   { path: 'form-definition', component: FormDefinitionComponent },
-  { path: 'kanban', component: KanbanComponent},
+  { path: 'chatbot', component: ChatbotComponent },
   { path: '**', component: PageNotFoundComponent }, // Wildcard route for a 404 page
 ];
 
