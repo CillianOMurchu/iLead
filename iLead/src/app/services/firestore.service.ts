@@ -29,17 +29,17 @@ export class FirestoreService {
     console.log('data to update is ', data);
     const { id } = data;
 
-    if (data.delete) {
-      this.deleteDoc(collectionName, id);
-    } else {
-      try {
-        this.save(collectionName, data, id);
-        this.snackBarService.openSnackBar('Form Definition Updated');
-      } catch (error) {
-        console.error('Error updating document:', error);
-        throw error;
-      }
+    // if (data.delete) {
+    //   this.deleteDoc(collectionName, id);
+    // } else {
+    try {
+      this.save(collectionName, data, id);
+      this.snackBarService.openSnackBar('Form Definition Updated');
+    } catch (error) {
+      console.error('Error updating document:', error);
+      throw error;
     }
+    // }
   }
 
   async deleteDoc(collectionName: string, documentId: string): Promise<void> {
@@ -57,6 +57,7 @@ export class FirestoreService {
     customId: string
   ): Promise<string> {
     try {
+      console.log('data to save is ', data);
       await setDoc(doc(this.firestore, collectionName, customId), data);
       return customId;
     } catch (error) {

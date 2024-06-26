@@ -1,27 +1,45 @@
-.create-form-definition {
-  padding: 50px;
-  text-align: center;
+.form-definition {
+  &__container {
+    display: flex;
+    gap: 20px;
+  }
 
   &__form {
-    &__current{
-     &__field{
+    &__prompt-variables,
+    &__fields {
       display: flex;
-      align-items: center;
-      gap: 12px;
-     }
-    }
-    &--details,
-    &--fields {
-      display: flex;
-      gap: 5px;
-    }
-    &--fields {
-      display: grid;
+      gap: 20px;
+      &__field-to-save {
+        display: flex;
+        gap: 20px;
+      }
     }
   }
 }
 
-.form-definition {
-  border: 2px solid red;
-  width: fit-content;
-}
+// .create-form-definition {
+//   padding: 50px;
+//   text-align: center;
+//   display: flex;
+//   gap: 20px;
+//   display: grid;
+//   min-height: 50vh;
+
+//   &__form {
+//     &__current {
+//       &__field {
+//         display: flex;
+//         align-items: center;
+//         gap: 12px;
+//       }
+//     }
+//     &--details,
+//     &--fields {
+//       display: flex;
+//       gap: 5px;
+//     }
+//     &--fields {
+//       display: grid;
+//     }
+//   }
+// }

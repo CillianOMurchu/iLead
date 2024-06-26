@@ -48,7 +48,7 @@ export class FormDefinitionComponent {
           this.firestoreService.save(
             FIRESTORE_COLLECTIONS.DEFINITIONS,
             result.definition,
-            result.definition.id
+            result.definition.name
           );
           this.snackBarService.openSnackBar('Form Definition Saved');
         } catch (error) {

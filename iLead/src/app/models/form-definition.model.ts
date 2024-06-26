@@ -3,17 +3,11 @@ export interface FormDefinitionField {
   type: {};
 }
 
-export interface ContextModel {
-  company: string;
-  objective: string;
-}
-
 export interface FormDefinition {
   name: string;
   fields: [FormDefinitionField];
-  context: ContextModel;
-  id: string;
   prompt: string;
+  id: string;
 }
 
 export interface FormDefinitionDialogResult {
@@ -29,3 +23,8 @@ export interface FormDefinitionDialogData {
 export const FIRESTORE_COLLECTIONS = {
   DEFINITIONS: 'definitions',
 };
+
+export interface PromptVariable {
+  BUSINESS: 'business';
+  OBJECTIVE: 'objective';
+}

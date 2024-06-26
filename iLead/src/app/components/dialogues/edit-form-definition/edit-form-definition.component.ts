@@ -19,7 +19,6 @@ export class EditFormDefinitionComponent {
 
   cancel(): void {
     this.data.definition.name = this.backupDefinition.name;
-    this.data.definition.context = this.backupDefinition.context;
     this.data.definition.fields = this.backupDefinition.fields;
     this.data.definition.id = this.backupDefinition.id;
     this.dialogRef.close();

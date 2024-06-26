@@ -15,6 +15,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import {MatChipsModule} from '@angular/material/chips';
 
 @NgModule({
   imports: [
@@ -34,6 +35,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     MatExpansionModule,
     MatBadgeModule,
     MatToolbarModule,
+    MatChipsModule,
   ],
   exports: [
     MatButtonModule,
@@ -51,6 +53,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     MatExpansionModule,
     MatBadgeModule,
     MatToolbarModule,
+    MatChipsModule,
     FormsModule
   ],
 })

@@ -19,6 +19,8 @@ import { DefinitionComponent } from './components/definition/definition.componen
 import { EditFormDefinitionComponent } from './components/dialogues/edit-form-definition/edit-form-definition.component';
 import { ChatbotComponent } from './pages/chatbot/chatbot.component';
 import { HttpClientModule } from '@angular/common/http';
+import { PromptComponent } from './components/prompt/prompt.component';
+import { DefaultPromptComponent } from './components/default-prompt/default-prompt.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +33,8 @@ import { HttpClientModule } from '@angular/common/http';
     DefinitionComponent,
     EditFormDefinitionComponent,
     ChatbotComponent,
+    PromptComponent,
+    DefaultPromptComponent,
   ],
   imports: [
     BrowserModule,

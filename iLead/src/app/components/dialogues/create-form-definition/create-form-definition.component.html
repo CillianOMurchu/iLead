@@ -1,81 +1,98 @@
-<h1>Form Definition</h1>
-<div class="create-form-definition">
-  <div class="create-form-definition__form">
-    <form
-      [formGroup]="formDefinition"
-      class="create-form-definition__form--details"
-    >
+<div class="form-definition__container">
+  <div class="form-definition">
+    <form [formGroup]="formDefinition" class="form-definition__form">
       <mat-form-field>
-        <mat-label>Form Id</mat-label>
-        <input matInput formControlName="id" />
-      </mat-form-field>
-
-      <mat-form-field>
-        <mat-label>Form Name</mat-label>
+        <mat-label>Name</mat-label>
         <input matInput formControlName="name" />
       </mat-form-field>
 
-      <mat-form-field>
-        <mat-label>Context</mat-label>
-        <input matInput formControlName="context" />
-      </mat-form-field>
-    </form>
+      <div formArrayName="promptVariables">
+        <div
+          class="form-definition__form__prompt-variables"
+          *ngFor="let prompt of promptVariables.controls; let i = index"
+          [formGroupName]="i"
+        >
+          <mat-form-field>
+            <mat-label>Company</mat-label>
+            <input matInput formControlName="company" />
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Context</mat-label>
+            <input matInput formControlName="context" />
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Objective</mat-label>
+            <input matInput formControlName="objective" />
+          </mat-form-field>
+        </div>
+      </div>
 
-    <h2>Fields</h2>
-    <form
-      [formGroup]="formDefinitionField"
-      class="create-form-definition__form--fields"
-    >
-      <mat-form-field>
-        <mat-label>Field Label</mat-label>
-        <input matInput formControlName="label" />
-      </mat-form-field>
-      <mat-form-field>
-        <mat-label>Field Type</mat-label>
-        <input matInput formControlName="type" />
-      </mat-form-field>
-      <button mat-raised-button color="warn" type="button" (click)="addField()">
-        Add Field
-      </button>
-    </form>
-
-    <br />
-
-    <button
-      class="mat-button"
-      mat-raised-button
-      color="primary"
-      (click)="saveDefinition()"
-    >
-      Save
-    </button>
-
-    <div class="create-form-definition__form__current">
-      <mat-card class="field-card">
-        <mat-card-header>
-          <mat-card-title>
-            <span>{{ formDefinition.get("name")?.value }}</span>
-          </mat-card-title>
-          <mat-card-subtitle>
-            <span>{{ formDefinition.get("context")?.value }}</span>
-          </mat-card-subtitle>
-        </mat-card-header>
-
-        <mat-card-content>
-          <h1>labels</h1>
-          <div *ngFor="let field of formFields; let i = index">
-            <div class="create-form-definition__form__current__field">
-              <mat-icon>label</mat-icon>
-              <span> {{ field.label }}</span>
-            </div>
-            <div class="create-form-definition__form__current__field">
-              <mat-icon>category</mat-icon>
-              <span>{{ field.type }}</span>
-            </div>
-            <hr />
+      <div formArrayName="fields">
+        <div
+          *ngFor="let field of fields.controls; let i = index"
+          [formGroupName]="i"
+          class="form-definition__form__fields"
+        >
+          <mat-form-field>
+            <mat-label>Label</mat-label>
+            <input matInput formControlName="label" />
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Type</mat-label>
+            <input matInput formControlName="type" />
+          </mat-form-field>
+          <div class="form-definition__form__fields__field-to-save">
+            <mat-chip-set>
+              <mat-chip *ngFor="let field of fields.controls; let i = index">
+                {{ field.get("label")?.value }} | {{ field.get("type")?.value }}
+              </mat-chip>
+            </mat-chip-set>
+            <button mat-raised-button (click)="this.addField()">
+              Save Field
+            </button>
           </div>
-        </mat-card-content>
-      </mat-card>
-    </div>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div class="form-definition__current-edit">
+    <mat-card class="example-card" appearance="outlined">
+      <mat-card-header>
+        <mat-card-title>Definition To Save</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <p>Name: {{ formDefinition.get("name")?.value }}</p>
+        <div *ngFor="let prompt of promptVariables.controls; let i = index">
+          <p>Company: {{ prompt.get("company")?.value }}</p>
+          <p>Context: {{ prompt.get("context")?.value }}</p>
+          <p>Objective: {{ prompt.get("objective")?.value }}</p>
+          <div>
+            <h3>Labels</h3>
+            <ul>
+              <li>
+                <mat-chip-set>
+                  <mat-chip *ngFor="let field of formFields">
+                    {{ field.label }} |
+                    {{ field.type }}
+                  </mat-chip>
+                </mat-chip-set>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </mat-card-content>
+      <mat-card-footer class="example-card-footer">
+        <div>
+          <p>Prompt: {{ displayedPrompt }}</p>
+          <button mat-raised-button (click)="this.updatePrompt()">
+            Update Prompt
+          </button>
+        </div>
+      </mat-card-footer>
+    </mat-card>
+    <button mat-raised-button (click)="this.saveDefinition()">
+      Save Definition
+    </button>
   </div>
 </div>
