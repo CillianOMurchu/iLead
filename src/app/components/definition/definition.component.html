@@ -1,0 +1,22 @@
+<mat-card (dblclick)="edit.emit(formDefinition)">
+  <mat-card-header>
+    <mat-card-title>
+      <span>{{ formDefinition.id }}</span>
+    </mat-card-title>
+  </mat-card-header>
+
+  <mat-card-content>
+    <h1>labels</h1>
+    <div *ngFor="let field of formDefinition.fields; let i = index">
+      <div class="create-form-definition__form__field">
+        <mat-icon>label</mat-icon>
+        <span> {{ field.label }}</span>
+      </div>
+      <div class="create-form-definition__form__field">
+        <mat-icon>category</mat-icon>
+        <span>{{ field.type }}</span>
+      </div>
+      <hr />
+    </div>
+  </mat-card-content>
+</mat-card>

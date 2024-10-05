@@ -1,0 +1,42 @@
+<div class="edit-form">
+  <h1>Edit the Form</h1>
+  <mat-form-field>
+    <mat-label>Title</mat-label>
+    <input matInput cdkFocusInitial [(ngModel)]="data.definition.name" />
+  </mat-form-field>
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Fields</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div *ngFor="let field of data.definition.fields; let i = index">
+        <div class="create-form-definition__form__field">
+          <mat-icon>label</mat-icon>
+          <input matInput cdkFocusInitial [(ngModel)]="field.label" />
+        </div>
+        <div class="create-form-definition__form__field">
+          <mat-icon>category</mat-icon>
+          <input matInput cdkFocusInitial [(ngModel)]="field.type" />
+        </div>
+        <hr />
+      </div>
+    </mat-card-content>
+
+    <div class="edit-form__actions" mat-dialog-actions>
+      <button mat-button [mat-dialog-close]="{ definition: data.definition }">
+        OK
+      </button>
+      <button mat-button (click)="cancel()">Cancel</button>
+      <button
+        *ngIf="data.enableDelete"
+        mat-fab
+        color="primary"
+        aria-label="Delete"
+        [mat-dialog-close]="{ definition: data.definition, delete: true }"
+      >
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
+
+  </mat-card>
+</div>

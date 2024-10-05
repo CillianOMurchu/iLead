@@ -1,0 +1,36 @@
+<!-- // display a list of available forms and their details from the definitions$ Observable-->
+
+<h1>Chatbot</h1>
+<hr />
+<hr />
+<hr />
+
+<h1>Chatbot Types</h1>
+<hr />
+<div>
+  <app-definition
+    *ngFor="let definition of definitions$ | async"
+    (edit)="editDefinition($event)"
+    [formDefinition]="definition"
+  />
+</div>
+
+<div class="chatbot-popup" id="chatbot-popup">
+  <div class="chat-box" id="chat-box">
+    <label for="story">Speak with the chatbot:</label>
+
+    <textarea id="story" name="story" rows="5" cols="33">
+Hello there, whats your boggle...
+</textarea
+    >
+  </div>
+  <div class="chat-input">
+    <input
+      [(ngModel)]="userInput"
+      type="text"
+      id="user-input"
+      placeholder="Type a message..."
+    />
+    <button mat-button (click)="sendQuery(userInput)">Send</button>
+  </div>
+</div>

@@ -1,0 +1,32 @@
+<mat-card appearance="outlined" *ngFor="let prompt of prompt$ | async">
+  <mat-card-header>
+    <mat-card-title>Default Prompt</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <p>{{ prompt["prompt"] }}</p>
+  </mat-card-content>
+</mat-card>
+
+<hr />
+
+<form [formGroup]="formPrompt">
+  <mat-form-field>
+    <mat-label>Objective</mat-label>
+    <input matInput formControlName="objective" />
+  </mat-form-field>
+
+  <button
+    class="mat-button"
+    mat-raised-button
+    color="primary"
+    (click)="savePrompt()"
+  >
+    Save
+  </button>
+</form>
+
+<h1>Definitions</h1>
+
+<app-definition
+  *ngFor="let definition of definitions$ | async"
+/>
