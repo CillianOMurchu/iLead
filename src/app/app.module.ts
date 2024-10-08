@@ -17,7 +17,6 @@ import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { environment } from '../environments/environment';
 import { DefinitionComponent } from './components/definition/definition.component';
 import { EditFormDefinitionComponent } from './components/dialogues/edit-form-definition/edit-form-definition.component';
-import { ChatbotComponent } from './pages/chatbot/chatbot.component';
 import { HttpClientModule } from '@angular/common/http';
 import { PromptComponent } from './components/prompt/prompt.component';
 import { DefaultPromptComponent } from './components/default-prompt/default-prompt.component';
@@ -32,7 +31,6 @@ import { DefaultPromptComponent } from './components/default-prompt/default-prom
     TaskDialogComponent,
     DefinitionComponent,
     EditFormDefinitionComponent,
-    ChatbotComponent,
     PromptComponent,
     DefaultPromptComponent,
   ],
