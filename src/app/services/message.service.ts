@@ -1,6 +1,7 @@
 import { Injectable, model } from '@angular/core';
 import { PromptService } from '@app/services/prompt.service';
 import axios from 'axios';
+import { environment } from 'environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -16,31 +17,24 @@ export class MessageService {
       const response = await axios.post(
         'https://api.openai.com/v1/chat/completions',
         {
-          max_tokens: 50,
+          model: 'gpt-4o-mini',
           temperature: 0,
-          stop: '\n',
-
-          model: 'gpt-4o',
-          response_format: {
-            type: 'json_object',
-          },
           messages: [
-            {
-              role: 'user',
-              content: message,
-            },
             {
               role: 'system',
               content:
-                'Your response should be a valid json. Get the clients name, email and DOB. use the variable reply to speak to the client. Use name, email and DOB ',
+                'follow the instructions given to you and respond with a valid json object',
+            },
+            {
+              role: 'user',
+              content: message,
             },
           ],
         },
         {
           headers: {
             'Content-Type': 'application/json',
-            Authorization:
-              'Bearer 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',
+            Authorization: `Bearer ${environment['OPENAI_API_KEY']}`,
           },
         }
       );
