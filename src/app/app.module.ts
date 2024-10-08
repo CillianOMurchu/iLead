@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DragDropModule } from '@angular/cdk/drag-drop';
-import { HomeComponent } from '@pages/home/home.component';
+import { ChatbotComponent } from '@pages/chatbot/chatbot.component';
 import { FormDefinitionComponent } from '@pages/form-definition/form-definition.component';
 import { PageNotFoundComponent } from '@pages/page-not-found/page-not-found.component';
 import { CreateFormDefinitionComponent } from '@components/dialogues/create-form-definition/create-form-definition.component';
@@ -20,11 +20,12 @@ import { EditFormDefinitionComponent } from './components/dialogues/edit-form-de
 import { HttpClientModule } from '@angular/common/http';
 import { PromptComponent } from './components/prompt/prompt.component';
 import { DefaultPromptComponent } from './components/default-prompt/default-prompt.component';
+import { HomeComponent } from './pages/home/home.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
+    ChatbotComponent,
     FormDefinitionComponent,
     PageNotFoundComponent,
     CreateFormDefinitionComponent,
@@ -33,6 +34,7 @@ import { DefaultPromptComponent } from './components/default-prompt/default-prom
     EditFormDefinitionComponent,
     PromptComponent,
     DefaultPromptComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,

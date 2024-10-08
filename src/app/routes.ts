@@ -1,7 +1,7 @@
-import { HomeComponent } from '@pages/home/home.component';
+import { ChatbotComponent } from '@pages/chatbot/chatbot.component';
 import { FormDefinitionComponent } from '@pages/form-definition/form-definition.component';
 
 export const ROUTES = {
-  HomeComponent,
+  ChatbotComponent,
   FormDefinitionComponent,
 };
