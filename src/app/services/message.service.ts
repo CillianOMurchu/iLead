@@ -1,7 +1,6 @@
-import { Injectable, model } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { PromptService } from '@app/services/prompt.service';
 import axios from 'axios';
-import { environment } from 'environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -34,7 +33,7 @@ export class MessageService {
         {
           headers: {
             'Content-Type': 'application/json',
-            Authorization: `Bearer ${environment['OPENAI_API_KEY']}`,
+            Authorization: `Bearer ${process.env['OPENAI_API_KEY']}`,
           },
         }
       );
