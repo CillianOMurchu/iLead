@@ -11,5 +11,5 @@ const firebaseConfig = {
 export const environment = {
   production: false,
   firebase: firebaseConfig,
-  OPENAI_API_KEY: process.env['OPENAI_API_KEY'],
+  OPENAI_API_KEY: `${process.env['OPENAI_API_KEY']}`,
 };

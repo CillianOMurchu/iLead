@@ -27,8 +27,7 @@
       "@services/*": ["app/services/*"],
       "@models/*": ["app/models/*"],
       "@components/*": ["app/components/*"],
-      "@material": ["app/material.module.ts"],
-
+      "@material": ["app/material.module.ts"]
     }
   },
   "angularCompilerOptions": {

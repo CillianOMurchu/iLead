@@ -1,12 +1,11 @@
 import { Injectable } from '@angular/core';
-import { PromptService } from '@app/services/prompt.service';
 import axios from 'axios';
 
 @Injectable({
   providedIn: 'root',
 })
 export class MessageService {
-  constructor(private promptService: PromptService) {}
+  constructor() {}
 
   async sendMessageToAI(message: string) {
     console.log('message to send', message);
