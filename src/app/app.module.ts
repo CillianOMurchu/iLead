@@ -13,12 +13,14 @@ import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { environment } from '../environments/environment';
 import { HttpClientModule } from '@angular/common/http';
 import { HomeComponent } from './pages/home/home.component';
+import { PromptConfigurationFormComponent } from './components/prompt-configuration-form/prompt-configuration-form.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     PageNotFoundComponent,
     HomeComponent,
+    PromptConfigurationFormComponent,
   ],
   imports: [
     BrowserModule,
