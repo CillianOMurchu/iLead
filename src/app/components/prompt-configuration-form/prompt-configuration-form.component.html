@@ -5,6 +5,7 @@
         <h1>Current Form Being Configured</h1>
         <app-prompt-configuration
           [config]="this.getFormConfig()"
+          (toggleDrawer)="this.toggleDrawer()"
         ></app-prompt-configuration>
       </div>
     </mat-drawer>
@@ -92,7 +93,7 @@
           </div>
         </mat-step>
       </mat-stepper>
-      <button color="secondary" mat-flat-button (click)="drawer.toggle()">
+      <button color="secondary" mat-flat-button (click)="this.toggleDrawer()">
         Toggle side panel
       </button>
     </div>

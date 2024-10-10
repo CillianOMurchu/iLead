@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-prompt-configuration',
@@ -7,6 +7,8 @@ import { Component, Input } from '@angular/core';
 })
 export class PromptConfigurationComponent {
   @Input() config: any;
+
+  @Output() toggleDrawer = new EventEmitter<void>();
 
   ngOnInit() {
     console.log('config is ', this.config);
