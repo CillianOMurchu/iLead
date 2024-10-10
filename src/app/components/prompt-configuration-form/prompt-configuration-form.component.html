@@ -1,1 +1,98 @@
-<p>prompt-configuration-form works!</p>
+<div class="prompt-configuration-form">
+  <mat-drawer-container class="example-container" autosize>
+    <mat-drawer #drawer class="example-sidenav" mode="side">
+      <h1>Current Form Being Configured</h1>
+      <app-prompt-configuration
+        [config]="this.getFormConfig()"
+      ></app-prompt-configuration>
+    </mat-drawer>
+    <div class="prompt-configuration-form__stepper">
+      <mat-stepper orientation="vertical" linear #stepper>
+        <mat-step [stepControl]="formDefinition">
+          <form [formGroup]="formDefinition">
+            <mat-form-field>
+              <mat-label>Name</mat-label>
+              <input
+                matInput
+                placeholder="Last name, First name"
+                formControlName="name"
+                required
+              />
+            </mat-form-field>
+            <div formArrayName="promptVariables">
+              <div
+                class="form-definition__form__prompt-variables"
+                *ngFor="let prompt of promptVariables.controls; let i = index"
+                [formGroupName]="i"
+              >
+                <mat-form-field>
+                  <mat-label>Company</mat-label>
+                  <input matInput formControlName="company" />
+                </mat-form-field>
+                <mat-form-field>
+                  <mat-label>Context</mat-label>
+                  <input matInput formControlName="context" />
+                </mat-form-field>
+                <mat-form-field>
+                  <mat-label>Objective</mat-label>
+                  <input matInput formControlName="objective" />
+                </mat-form-field>
+              </div>
+            </div>
+            <div>
+              <button mat-button matStepperNext>Next</button>
+            </div>
+          </form>
+        </mat-step>
+        <mat-step [stepControl]="formDefinition">
+          <form [formGroup]="formDefinition">
+            <div formArrayName="fields">
+              <div
+                *ngFor="let field of fields.controls; let i = index"
+                [formGroupName]="i"
+                class="form-definition__form__fields"
+              >
+                <mat-form-field>
+                  <mat-label>Label</mat-label>
+                  <input matInput formControlName="label" #labelInput />
+                </mat-form-field>
+                <mat-form-field>
+                  <mat-label>Type</mat-label>
+                  <input matInput formControlName="type" />
+                </mat-form-field>
+                <div class="form-definition__form__fields__field-to-save">
+                  <mat-chip-set>
+                    <mat-chip
+                      *ngFor="let field of fields.controls; let i = index"
+                    >
+                      {{ field.get("label")?.value }} |
+                      {{ field.get("type")?.value }}
+                    </mat-chip>
+                  </mat-chip-set>
+                  <button mat-raised-button (click)="this.addField()">
+                    Save Field
+                  </button>
+                </div>
+                <div>
+                  <button mat-button matStepperNext>Next</button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </mat-step>
+        <mat-step>
+          <ng-template matStepLabel>Done</ng-template>
+          <p>You are now done.</p>
+          <div>
+            <button mat-button matStepperPrevious>Back</button>
+            <button mat-button (click)="stepper.reset()">Reset</button>
+            <button mat-button (click)="this.tryItOut()">Try it out</button>
+          </div>
+        </mat-step>
+      </mat-stepper>
+      <button color="secondary" mat-flat-button (click)="drawer.toggle()">
+        Toggle side panel
+      </button>
+    </div>
+  </mat-drawer-container>
+</div>

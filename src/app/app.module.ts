@@ -14,6 +14,7 @@ import { environment } from '../environments/environment';
 import { HttpClientModule } from '@angular/common/http';
 import { HomeComponent } from './pages/home/home.component';
 import { PromptConfigurationFormComponent } from './components/prompt-configuration-form/prompt-configuration-form.component';
+import { PromptConfigurationComponent } from './components/prompt-configuration/prompt-configuration.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { PromptConfigurationFormComponent } from './components/prompt-configurat
     PageNotFoundComponent,
     HomeComponent,
     PromptConfigurationFormComponent,
+    PromptConfigurationComponent,
   ],
   imports: [
     BrowserModule,

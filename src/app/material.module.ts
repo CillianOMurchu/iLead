@@ -15,7 +15,9 @@ import { MatCardModule } from '@angular/material/card';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import {MatChipsModule} from '@angular/material/chips';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatStepperModule } from '@angular/material/stepper';
+import { MatSidenavModule } from '@angular/material/sidenav';
 
 @NgModule({
   imports: [
@@ -29,6 +31,8 @@ import {MatChipsModule} from '@angular/material/chips';
     FormsModule,
     MatSlideToggleModule,
     MatSelectModule,
+    MatSidenavModule,
+    MatStepperModule,
     MatSnackBarModule,
     MatMenuModule,
     MatCardModule,
@@ -47,6 +51,8 @@ import {MatChipsModule} from '@angular/material/chips';
     ReactiveFormsModule,
     MatSlideToggleModule,
     MatSelectModule,
+    MatSidenavModule,
+    MatStepperModule,
     MatSnackBarModule,
     MatMenuModule,
     MatCardModule,
@@ -54,7 +60,7 @@ import {MatChipsModule} from '@angular/material/chips';
     MatBadgeModule,
     MatToolbarModule,
     MatChipsModule,
-    FormsModule
+    FormsModule,
   ],
 })
 export class MaterialModule {}

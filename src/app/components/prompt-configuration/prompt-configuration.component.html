@@ -1,0 +1,28 @@
+<mat-list role="list">
+  <h1>User details</h1>
+
+  <mat-list-item role="listitem"
+    >Name: {{ this.config.form.name }}</mat-list-item
+  >
+  <mat-list role="list">
+    <div
+      *ngFor="let promptVar of this.config.form.promptVariables; let i = index"
+    >
+      <mat-list-item role="listitem"
+        >Company: {{ promptVar.company }}</mat-list-item
+      >
+      <mat-list-item role="listitem"
+        >Context: {{ promptVar.context }}</mat-list-item
+      >
+      <mat-list-item role="listitem"
+        >Objective: {{ promptVar.objective }}</mat-list-item
+      >
+    </div>
+  </mat-list>
+  <mat-list role="list">
+    <h1>Types</h1>
+    <div *ngFor="let type of this.config.types" role="listitem">
+      <mat-list-item role="listItem"> Type: {{ type | json }} </mat-list-item>
+    </div>
+  </mat-list>
+</mat-list>

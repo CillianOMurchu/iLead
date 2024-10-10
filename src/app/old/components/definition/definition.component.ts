@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import type { FormDefinition } from '@app/models/form-definition.model';
+// import type { FormDefinition } from '@app/models/form-definition.model';
 
 @Component({
   selector: 'app-definition',
@@ -8,7 +8,7 @@ import type { FormDefinition } from '@app/models/form-definition.model';
 })
 export class DefinitionComponent {
   @Input() formDefinition: any;
-  @Output() edit = new EventEmitter<FormDefinition>();
+  // @Output() edit = new EventEmitter<FormDefinition>();
 
   constructor() {}
 
