@@ -1,9 +1,15 @@
 $header-height: 68px;
 
-.prompt-configuration-form{
+.prompt-configuration-form {
   height: calc(100% - $header-height);
   border: 2px solid red;
-  display: flex
+  display: flex;
+
   &__stepper {
+    padding: 10px 20px;
+  }
+
+  &__currently-editing {
+    padding: 10px 20px;
   }
 }

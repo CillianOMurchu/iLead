@@ -1,5 +1,5 @@
 <mat-list role="list">
-  <h1>User details</h1>
+  <h2>User details</h2>
 
   <mat-list-item role="listitem"
     >Name: {{ this.config.form.name }}</mat-list-item
@@ -20,7 +20,7 @@
     </div>
   </mat-list>
   <mat-list role="list">
-    <h1>Types</h1>
+    <h2>Types</h2>
     <div *ngFor="let type of this.config.types" role="listitem">
       <mat-list-item role="listItem"> Type: {{ type | json }} </mat-list-item>
     </div>

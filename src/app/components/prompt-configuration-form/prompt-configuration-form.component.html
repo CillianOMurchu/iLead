@@ -1,10 +1,12 @@
 <div class="prompt-configuration-form">
   <mat-drawer-container class="example-container" autosize>
     <mat-drawer #drawer class="example-sidenav" mode="side">
-      <h1>Current Form Being Configured</h1>
-      <app-prompt-configuration
-        [config]="this.getFormConfig()"
-      ></app-prompt-configuration>
+      <div class="prompt-configuration-form__currently-editing">
+        <h1>Current Form Being Configured</h1>
+        <app-prompt-configuration
+          [config]="this.getFormConfig()"
+        ></app-prompt-configuration>
+      </div>
     </mat-drawer>
     <div class="prompt-configuration-form__stepper">
       <mat-stepper orientation="vertical" linear #stepper>
