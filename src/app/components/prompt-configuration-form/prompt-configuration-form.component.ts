@@ -1,6 +1,13 @@
-import { Component, ElementRef, inject, OnInit, ViewChild } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  inject,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDrawer } from '@angular/material/sidenav';
+import { MatStepper } from '@angular/material/stepper';
 import { FormEditingService } from '@app/services/form-editing.service';
 import { SnackBarService } from '@app/services/snack-bar.service';
 
@@ -15,6 +22,7 @@ export class PromptConfigurationFormComponent implements OnInit {
   formFields: { label: string; type: any }[] = [];
   @ViewChild('drawer') drawer!: MatDrawer;
   @ViewChild('labelInput') labelInput!: ElementRef;
+  @ViewChild('stepper') stepper!: MatStepper;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -100,7 +108,6 @@ export class PromptConfigurationFormComponent implements OnInit {
   }
 
   getFormConfig() {
-    console.log('this.formDefinition.value si ', this.formDefinition.value);
     return { form: this.formDefinition.value, types: this.formFields };
   }
 
@@ -110,5 +117,10 @@ export class PromptConfigurationFormComponent implements OnInit {
       result.fields = this.formFields;
       this.formEditingService.save({ definition: result });
     }
+  }
+
+  resetForms() {
+    this.stepper.reset();
+    this.formFields = [];
   }
 }
