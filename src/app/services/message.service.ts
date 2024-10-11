@@ -7,6 +7,8 @@ import OpenAI from 'openai';
   providedIn: 'root',
 })
 export class MessageService {
+  private apiUrl = environment.chatGPTKey;
+
   constructor(private formEditingService: FormEditingService) {}
 
   mapValuesToPrompt() {
@@ -14,7 +16,7 @@ export class MessageService {
     const { definition } = currentForm;
     const { name, promptVariables, fields } = definition;
     const { company, context, objective } = promptVariables[0];
-
+    console.log('apiUrl is ', this.apiUrl);
     console.log('name is ', name);
     console.log(
       'name, promptVariables, fields is ',
@@ -37,8 +39,7 @@ export class MessageService {
 
   async sendMessageToAI(message: string) {
     const openai = new OpenAI({
-      apiKey:
-        'sk-IJ12Fq0Rjg-oF3sfS-jNp5GDakJGRjw_RD9b0zDPJIT3BlbkFJ3lLUMrGGrBuad4wYr6ohF0EHupGJXGaMMWHH_37dMA',
+      apiKey: this.apiUrl,
       dangerouslyAllowBrowser: true,
     });
 
