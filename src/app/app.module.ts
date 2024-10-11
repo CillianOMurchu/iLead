@@ -15,6 +15,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { HomeComponent } from './pages/home/home.component';
 import { PromptConfigurationFormComponent } from './components/prompt-configuration-form/prompt-configuration-form.component';
 import { PromptConfigurationComponent } from './components/prompt-configuration/prompt-configuration.component';
+import { ChatbotComponent } from './components/chatbot/chatbot.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { PromptConfigurationComponent } from './components/prompt-configuration/
     HomeComponent,
     PromptConfigurationFormComponent,
     PromptConfigurationComponent,
+    ChatbotComponent,
   ],
   imports: [
     BrowserModule,

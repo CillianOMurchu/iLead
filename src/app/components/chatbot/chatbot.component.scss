@@ -1,0 +1,18 @@
+.conversation {
+  border: 1px solid blue;
+  display: grid;
+
+  width: 600px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  grid-template-rows: 1fr auto auto;
+
+  .messages {
+    overflow-y: scroll;
+    height: 300px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+}
