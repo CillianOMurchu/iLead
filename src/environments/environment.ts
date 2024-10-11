@@ -1,5 +1,3 @@
-import { env } from 'process';
-
 const firebaseConfig = {
   projectId: 'ilead-fd085',
   appId: '1:444022814318:web:c65d2f671fb89f671f987f',
@@ -13,5 +11,4 @@ const firebaseConfig = {
 export const environment = {
   production: false,
   firebase: firebaseConfig,
-  OPENAI_API_KEY: `${env['OPENAI_API_KEY']}`,
 };

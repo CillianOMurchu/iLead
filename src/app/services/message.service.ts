@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import axios from 'axios';
+import { environment } from 'environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -9,7 +10,6 @@ export class MessageService {
 
   async sendMessageToAI(message: string) {
     console.log('message to send', message);
-
     try {
       // Realiza la solicitud a la API de OpenAI utilizando axios
       const response = await axios.post(
@@ -32,7 +32,7 @@ export class MessageService {
         {
           headers: {
             'Content-Type': 'application/json',
-            Authorization: `Bearer ${process.env['OPENAI_API_KEY']}`,
+            Authorization: `Bearer ${'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'}`,
           },
         }
       );

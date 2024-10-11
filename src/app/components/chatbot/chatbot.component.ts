@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { MessageService } from '@app/services/message.service';
 
 @Component({
   selector: 'app-chatbot',
@@ -10,9 +11,15 @@ export class ChatbotComponent {
 
   messages: string[] = [];
 
+  constructor(private messageService: MessageService) {}
+
   sendMessage() {
     console.log('sending ', this.value);
     this.messages.push(`You: ${this.value}`);
+    this.messageService.sendMessageToAI(this.value).then((response) => {
+      console.log('response', response);
+      this.messages.push(`Bot: ${response}`);
+    });
     this.value = '';
   }
 }
