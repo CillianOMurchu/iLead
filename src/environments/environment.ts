@@ -11,4 +11,5 @@ const firebaseConfig = {
 export const environment = {
   production: false,
   firebase: firebaseConfig,
+  chatGPTKey: 'sk-SecZzKoC5JocK6fZuDR7IRl4GIXtV5inEsNIjzsWDeT3BlbkFJU6nrdOQsu_5uk2ORvvGqio_gvRqgMu31YuJIvlGOUA',
 };

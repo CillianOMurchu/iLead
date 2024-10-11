@@ -18,7 +18,7 @@ export class ChatbotComponent {
     this.messages.push(`You: ${this.value}`);
     this.messageService.sendMessageToAI(this.value).then((response) => {
       console.log('response', response);
-      this.messages.push(`Bot: ${response}`);
+      this.messages.push(`Bot: ${response.content}`);
     });
     this.value = '';
   }
