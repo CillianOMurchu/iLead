@@ -14,7 +14,7 @@ export class FormEditingService {
     );
   }
 
-  getCurrent(): any {
+  getCurrentPrompt(): any {
     const result = this.localStorageService.getItem('currentlyEditingForm');
     if (!result) {
       return null;

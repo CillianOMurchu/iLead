@@ -9,6 +9,7 @@ import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDrawer } from '@angular/material/sidenav';
 import { MatStepper } from '@angular/material/stepper';
 import { FormEditingService } from '@app/services/form-editing.service';
+import { PromptService } from '@app/services/prompt.service';
 import { SnackBarService } from '@app/services/snack-bar.service';
 
 @Component({
@@ -85,7 +86,8 @@ export class PromptConfigurationFormComponent implements OnInit {
   }
 
   tryItOut() {
-    this.snackBarService.openSnackBar('Go to chatbot and try it out');
+    this.saveDefinition();
+    this.snackBarService.openSnackBar('Prompt saved and ready to try out in chatbot');
   }
 
   buildForm(): void {
