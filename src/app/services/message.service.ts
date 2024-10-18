@@ -7,7 +7,7 @@ import OpenAI from 'openai';
   providedIn: 'root',
 })
 export class MessageService {
-  private apiUrl = 'API_KEY_HERE';
+  private apiUrl = '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';
 
   mappedPrompt = '';
 
