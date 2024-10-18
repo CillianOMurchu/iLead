@@ -23,4 +23,9 @@
   <button matSuffix mat-icon-button aria-label="Enviar" (click)="sendMessage()">
     <mat-icon>send</mat-icon>
   </button>
+
+  <div>
+    <h1>Current Prompt</h1>
+    <p [innerHTML]="this.messageService.mappedPrompt"></p>
+  </div>
 </div>

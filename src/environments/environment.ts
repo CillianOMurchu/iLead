@@ -4,5 +4,5 @@ export const environment = {
   production: false,
   firebase: firebaseConfig,
   chatGPTKey:
-    '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',
+    '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',
 };

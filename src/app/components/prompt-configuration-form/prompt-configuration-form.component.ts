@@ -19,8 +19,10 @@ import { SnackBarService } from '@app/services/snack-bar.service';
 })
 export class PromptConfigurationFormComponent implements OnInit {
   private _formBuilder = inject(FormBuilder);
+
   formDefinition: FormGroup = new FormGroup({});
   formFields: { label: string; type: any }[] = [];
+
   @ViewChild('drawer') drawer!: MatDrawer;
   @ViewChild('labelInput') labelInput!: ElementRef;
   @ViewChild('stepper') stepper!: MatStepper;
@@ -33,6 +35,8 @@ export class PromptConfigurationFormComponent implements OnInit {
 
   ngOnInit() {
     this.buildForm();
+    const currentPrompt = this.formEditingService.getCurrentPrompt();
+    console.log('currentPrompt is ', currentPrompt);
   }
 
   ngAfterViewInit() {
@@ -87,23 +91,25 @@ export class PromptConfigurationFormComponent implements OnInit {
 
   tryItOut() {
     this.saveDefinition();
-    this.snackBarService.openSnackBar('Prompt saved and ready to try out in chatbot');
+    this.snackBarService.openSnackBar(
+      'Prompt saved and ready to try out in chatbot'
+    );
   }
 
   buildForm(): void {
     this.formDefinition = this.formBuilder.group({
-      name: [''],
+      name: ['test name'],
       promptVariables: this.formBuilder.array([
         this.formBuilder.group({
-          company: ['', Validators.required],
-          context: ['', Validators.required],
-          objective: ['', Validators.required],
+          company: ['test company', Validators.required],
+          context: ['test context', Validators.required],
+          objective: ['test objective', Validators.required],
         }),
       ]),
       fields: this.formBuilder.array([
         this.formBuilder.group({
-          label: [''],
-          type: [''],
+          label: ['test label'],
+          type: ['test type'],
         }),
       ]),
     });
@@ -115,8 +121,13 @@ export class PromptConfigurationFormComponent implements OnInit {
 
   saveDefinition(): void {
     if (this.formDefinition.valid) {
-      const result = this.formDefinition.value;
-      result.fields = this.formFields;
+      const { name, promptVariables } = this.formDefinition.value;
+      const result = {
+        name,
+        promptVariables: promptVariables[0],
+        types: this.formFields,
+      };
+
       this.formEditingService.save({ definition: result });
     }
   }

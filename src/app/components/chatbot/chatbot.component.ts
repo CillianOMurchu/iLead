@@ -11,10 +11,9 @@ export class ChatbotComponent {
 
   messages: string[] = [];
 
-  constructor(private messageService: MessageService) {}
+  constructor(public messageService: MessageService) {}
 
   sendMessage() {
-    console.log('sending ', this.value);
     this.messages.push(`You: ${this.value}`);
     this.messageService.sendMessageToAI(this.value).then((response) => {
       console.log('response', response);
