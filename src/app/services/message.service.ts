@@ -7,8 +7,7 @@ import OpenAI from 'openai';
   providedIn: 'root',
 })
 export class MessageService {
-  private apiUrl =
-    'API_KEY_HERE';
+  private apiUrl = 'API_KEY_HERE';
 
   mappedPrompt = '';
 
