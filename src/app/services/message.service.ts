@@ -1,23 +1,32 @@
 import { Injectable } from '@angular/core';
 import { FormEditingService } from '@app/services/form-editing.service';
-import { environment } from 'environments/environment';
 import OpenAI from 'openai';
+import { ChatCompletionMessageParam } from 'openai/resources/chat/completions';
 
 @Injectable({
   providedIn: 'root',
 })
 export class MessageService {
-  private apiUrl = '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';
+  private apiUrl =
+    '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';
 
   mappedPrompt = '';
+
+  previousHistory: ChatCompletionMessageParam[] = [];
 
   constructor(private formEditingService: FormEditingService) {
     this.mapValuesToPrompt();
   }
 
+  addMessageToHistory(response: string) {
+    this.previousHistory.push({
+      role: 'system',
+      content: response,
+    });
+  }
+
   mapValuesToPrompt() {
     const form = this.formEditingService.getCurrentPrompt();
-    console.log('form is ', form);
 
     if (!form) {
       return;
@@ -29,9 +38,6 @@ export class MessageService {
     }
 
     const { company, context, objective } = promptVariables;
-    console.log('name is ', name);
-    console.log('promptVariables are ', promptVariables);
-    console.log('types are ', types);
 
     const variablesString = types
       .map(
@@ -55,30 +61,39 @@ export class MessageService {
     These are the variables you should request: ${variablesString}`;
   }
 
-  async sendMessageToAI(message: string) {
+  async sendMessageToAI(message: string): Promise<string | null> {
+    this.previousHistory.push({
+      role: 'user',
+      content: message,
+      name: 'message',
+    });
     this.mapValuesToPrompt();
     const openai = new OpenAI({
       apiKey: this.apiUrl,
       dangerouslyAllowBrowser: true,
     });
 
-    console.log('mappedPrompt', this.mappedPrompt);
+    console.log('this.previousHistory', this.previousHistory);
+    const messages: ChatCompletionMessageParam[] = [
+      {
+        role: 'system',
+        content: this.mappedPrompt,
+      },
+      {
+        role: 'user',
+        content: message,
+      },
+      ...this.previousHistory,
+    ];
+
     const completion = await openai.chat.completions.create({
       model: 'gpt-4o',
       temperature: 0,
-      messages: [
-        {
-          role: 'system',
-          content: this.mappedPrompt,
-        },
-        {
-          role: 'user',
-          content: message,
-        },
-      ],
+      messages,
     });
 
     console.log('completion', completion);
-    return completion.choices[0].message;
+
+    return completion.choices[0].message.content;
   }
 }

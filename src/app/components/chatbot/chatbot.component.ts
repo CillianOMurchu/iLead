@@ -31,8 +31,12 @@ export class ChatbotComponent {
   sendMessage() {
     this.messages.push(`You: ${this.value}`);
     this.messageService.sendMessageToAI(this.value).then((response) => {
-      console.log('response', response);
-      this.messages.push(`Bot: ${response.content}`);
+      const messageMatch = response?.match(/"message":\s*"([^"]+)"/);
+      if (messageMatch) {
+        console.log('response is ', messageMatch[1]);
+        this.messages.push(`Bot: ${messageMatch[1]}`);
+        this.messageService.addMessageToHistory(messageMatch[1]);
+      }
     });
     this.value = '';
   }
