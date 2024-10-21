@@ -7,8 +7,7 @@ import { ChatCompletionMessageParam } from 'openai/resources/chat/completions';
   providedIn: 'root',
 })
 export class MessageService {
-  private apiUrl =
-    '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';
+  private apiUrl = 'api here';
 
   mappedPrompt = '';
 
