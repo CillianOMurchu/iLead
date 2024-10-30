@@ -32,14 +32,7 @@ export class ChatbotComponent {
     this.messages.push(`You: ${this.value}`);
     this.messageService.sendMessageToAI(this.value).then((response) => {
       if (response) {
-        const jsonRes = JSON.parse(response);
-        const message = jsonRes.message;
-        if (message) {
-          this.messages.push(`Bot: ${message}`);
-          this.messageService.addMessageToHistory(message);
-        } else {
-          this.messages.push(JSON.stringify(jsonRes));
-        }
+        this.messages.push(response);
       }
     });
     this.value = '';

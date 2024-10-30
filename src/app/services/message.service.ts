@@ -7,7 +7,7 @@ import { ChatCompletionMessageParam } from 'openai/resources/chat/completions';
   providedIn: 'root',
 })
 export class MessageService {
-  private apiUrl = '';
+  private apiUrl = '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';
 
   defaultSystemPrompt = '';
 
@@ -54,6 +54,7 @@ export class MessageService {
       `Do not respond with Markdown or anything else, ONLY JSON.` +
       `You are the virtual assistant of the person ${name} who works for ${company}.` +
       `Your goal is to respond to the user in the same language they use, utilizing the 'message' variable.` +
+      `If you don't have a message variable in the response, then make sure you add at least an options key and put the array of answers as the value.` +
       `Ask questions if necessary and capture as much user data as possible while assisting the user and in addition to their objective which is ${objective}` +
       `Keep in mind the context you've been given aswell which is ${context}` +
       `You must capture the user's data and add the variables to your JSON as you obtain their values.` +
