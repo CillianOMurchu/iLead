@@ -98,7 +98,6 @@ export class CreateFormDefinitionComponent {
       this.fields.reset();
     }
 
-    console.log('this.formFields is now ', this.formFields);
   }
 
   saveDefinition(): void {
@@ -106,7 +105,6 @@ export class CreateFormDefinitionComponent {
       const result = this.formDefinition.value;
       result.fields = this.formFields;
       result.prompt = this.displayedPrompt;
-      console.log('result is ', result);
       this.dialogRef.close({ definition: result });
     }
   }

@@ -26,7 +26,6 @@ export class FirestoreService {
       return;
     }
 
-    console.log('data to update is ', data);
     const { id } = data;
 
     // if (data.delete) {

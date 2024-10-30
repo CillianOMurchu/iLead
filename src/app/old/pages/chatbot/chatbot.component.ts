@@ -46,7 +46,9 @@ export class ChatbotComponent {
       try {
         // Enviar mensaje a la IA y obtener respuesta
         const aiResponse = await this.messageService.sendMessageToAI(message);
-        this.addMessage(aiResponse, 'IA');
+        if (aiResponse) {
+          this.addMessage(aiResponse, 'IA');
+        }
       } catch (error) {
         this.addMessage('¡Oops! Algo salió mal.', 'IA');
       }

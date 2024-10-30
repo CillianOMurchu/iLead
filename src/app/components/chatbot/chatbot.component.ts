@@ -31,11 +31,15 @@ export class ChatbotComponent {
   sendMessage() {
     this.messages.push(`You: ${this.value}`);
     this.messageService.sendMessageToAI(this.value).then((response) => {
-      const messageMatch = response?.match(/"message":\s*"([^"]+)"/);
-      if (messageMatch) {
-        console.log('response is ', messageMatch[1]);
-        this.messages.push(`Bot: ${messageMatch[1]}`);
-        this.messageService.addMessageToHistory(messageMatch[1]);
+      if (response) {
+        const jsonRes = JSON.parse(response);
+        const message = jsonRes.message;
+        if (message) {
+          this.messages.push(`Bot: ${message}`);
+          this.messageService.addMessageToHistory(message);
+        } else {
+          this.messages.push(JSON.stringify(jsonRes));
+        }
       }
     });
     this.value = '';

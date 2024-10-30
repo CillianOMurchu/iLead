@@ -35,12 +35,6 @@ export class PromptConfigurationFormComponent implements OnInit {
 
   ngOnInit() {
     this.buildForm();
-    const currentPrompt = this.formEditingService.getCurrentPrompt();
-    console.log('currentPrompt is ', currentPrompt);
-  }
-
-  ngAfterViewInit() {
-    this.toggleDrawer();
   }
 
   toggleDrawer(): void {

@@ -7,9 +7,12 @@ import { ChatCompletionMessageParam } from 'openai/resources/chat/completions';
   providedIn: 'root',
 })
 export class MessageService {
-  private apiUrl = 'api here';
+  private apiUrl =
+    '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';
 
-  mappedPrompt = '';
+  defaultSystemPrompt = '';
+
+  defaultUserPrompt = ``;
 
   previousHistory: ChatCompletionMessageParam[] = [];
 
@@ -45,26 +48,25 @@ export class MessageService {
       )
       .join(', ');
 
-    this.mappedPrompt = `Your response must always be valid JSON and must not include any other text. You are the virtual assistant of the person
-    ${name}
-    who works for
-    ${company}
-    Your goal is to respond to the user in the same language they use, utilizing the 'message' variable.
-    Ask questions if necessary and capture as much user data as possible while assisting the user and in addition to their objective of
-    ${objective}
-    and keeping in mind the context
-    ${context}
-    You must capture the user's data and add the variables to your JSON as you obtain their values.
-    Once you have finished, ask for confirmation to send the data to the user and if confirmed, add the 'Finish' variable with the value 'True'.
-    Always keep in mind the name of the variables and their specifications.
-    These are the variables you should request: ${variablesString}`;
+    this.defaultSystemPrompt =
+      `Speak only in english.` +
+      `ONLY respond with JSON, for example, { aKey: aValue }` +
+      'Do NOT prefix with any markdown, like ```json or otherwise' +
+      `Do not respond with Markdown or anything else, ONLY JSON.` +
+      `You are the virtual assistant of the person ${name} who works for ${company}.` +
+      `Your goal is to respond to the user in the same language they use, utilizing the 'message' variable.` +
+      `Ask questions if necessary and capture as much user data as possible while assisting the user and in addition to their objective which is ${objective}` +
+      `Keep in mind the context you've been given aswell which is ${context}` +
+      `You must capture the user's data and add the variables to your JSON as you obtain their values.` +
+      `Once you have finished, ask for confirmation to send the data to the user and if confirmed, add the 'Finish' variable with the value 'True'.` +
+      `Always keep in mind the name of the variables and their specifications.` +
+      `These are the variables you should request: ${variablesString}`;
   }
 
   async sendMessageToAI(message: string): Promise<string | null> {
     this.previousHistory.push({
       role: 'user',
       content: message,
-      name: 'message',
     });
     this.mapValuesToPrompt();
     const openai = new OpenAI({
@@ -73,25 +75,31 @@ export class MessageService {
     });
 
     console.log('this.previousHistory', this.previousHistory);
-    const messages: ChatCompletionMessageParam[] = [
+    const initialMessages: ChatCompletionMessageParam[] = [
       {
         role: 'system',
-        content: this.mappedPrompt,
+        content: this.defaultSystemPrompt,
       },
       {
         role: 'user',
-        content: message,
+        content: this.defaultUserPrompt,
       },
-      ...this.previousHistory,
     ];
 
     const completion = await openai.chat.completions.create({
       model: 'gpt-4o',
+      response_format: {
+        type: 'json_object',
+      },
       temperature: 0,
-      messages,
+      messages: [
+        ...initialMessages,
+        { role: 'user', content: message },
+        ...this.previousHistory,
+      ],
     });
 
-    console.log('completion', completion);
+    console.log('response is', completion.choices[0]);
 
     return completion.choices[0].message.content;
   }
